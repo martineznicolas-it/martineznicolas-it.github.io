@@ -1,0 +1,1526 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nicolás Martínez | Portfolio de Gestión de TI & Desarrollo</title>
+  <meta name="description" content="Portfolio de Nicolás Martínez, estudiante de la Licenciatura en Gestión de Tecnología de la Información en UADE. Proyectos de análisis de sistemas, algoritmos, desarrollo web y analítica." />
+
+  <!-- Favicon SVG Monograma NM -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'><rect width='40' height='40' rx='8' fill='%232563eb'/><text x='50%25' y='55%25' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-weight='800' font-size='18' fill='%23ffffff'>NM</text></svg>" type="image/svg+xml" />
+
+  <!-- Tema antes de pintar: evita el destello del tema incorrecto -->
+  <script>
+    (function () {
+      // Oscuro por defecto; si la persona eligió otro tema, se respeta
+      var t = null;
+      try { t = localStorage.getItem('portfolio-theme'); } catch (e) {}
+      if (t !== 'light' && t !== 'dark' && t !== 'green') t = 'dark';
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ==========================================================================
+       VARIABLES Y TEMAS (LIGHT / DARK)
+       ========================================================================== */
+    :root {
+      --font-main: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --radius-full: 9999px;
+      --transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      --container-max: 1200px;
+    }
+
+    /* MODO OSCURO */
+    [data-theme="dark"] {
+      --bg-body: #090d16;
+      --bg-surface: #111827;
+      --bg-surface-elevated: #1a2234;
+      --bg-surface-glass: rgba(17, 24, 39, 0.85);
+      --bg-stage: #0b1120;
+      --border-color: #232f48;
+      --border-color-hover: #3b82f6;
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --text-faint: #64748b;
+      --primary: #3b82f6;
+      --primary-hover: #2563eb;
+      --primary-glow: rgba(59, 130, 246, 0.18);
+      --accent: #06b6d4;
+      --green: #10b981;
+      --tag-bg: #1e293b;
+      --tag-border: #334155;
+      --tag-text: #93c5fd;
+      --badge-uade-bg: rgba(37, 99, 235, 0.15);
+      --badge-uade-text: #60a5fa;
+      --badge-personal-bg: rgba(16, 185, 129, 0.15);
+      --badge-personal-text: #34d399;
+      --metric-box-bg: #131d2e;
+      --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+      --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.45);
+      --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.6);
+    }
+
+    /* MODO CLARO */
+    [data-theme="light"] {
+      --bg-body: #f8fafc;
+      --bg-surface: #ffffff;
+      --bg-surface-elevated: #f1f5f9;
+      --bg-surface-glass: rgba(255, 255, 255, 0.88);
+      --bg-stage: #e2e8f0;
+      --border-color: #e2e8f0;
+      --border-color-hover: #2563eb;
+      --text-main: #0f172a;
+      --text-muted: #475569;
+      --text-faint: #64748b;
+      --primary: #2563eb;
+      --primary-hover: #1d4ed8;
+      --primary-glow: rgba(37, 99, 235, 0.12);
+      --accent: #0284c7;
+      --green: #059669;
+      --tag-bg: #eef2f7;
+      --tag-border: #cbd5e1;
+      --tag-text: #1e40af;
+      --badge-uade-bg: #dbeafe;
+      --badge-uade-text: #1d4ed8;
+      --badge-personal-bg: #d1fae5;
+      --badge-personal-text: #065f46;
+      --metric-box-bg: #f8fafc;
+      --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 8px 20px rgba(0, 0, 0, 0.08);
+      --shadow-lg: 0 16px 36px rgba(0, 0, 0, 0.12);
+    }
+
+    /* MODO TERMINAL (verde fósforo, como los monitores de los 80) */
+    [data-theme="green"] {
+      --bg-body: #030a06;
+      --bg-surface: #07140d;
+      --bg-surface-elevated: #0b1d12;
+      --bg-surface-glass: rgba(4, 14, 8, 0.88);
+      --bg-stage: #020704;
+      --border-color: #14361f;
+      --border-color-hover: #39ff88;
+      --text-main: #c8ffd9;
+      --text-muted: #7fc79a;
+      --text-faint: #4d8a63;
+      --primary: #39ff88;
+      --primary-hover: #22e070;
+      --primary-glow: rgba(57, 255, 136, 0.22);
+      --accent: #d4ff3a;
+      --green: #39ff88;
+      --tag-bg: #0a1f12;
+      --tag-border: #1d4a2b;
+      --tag-text: #8dffb8;
+      --badge-uade-bg: rgba(57, 255, 136, 0.12);
+      --badge-uade-text: #39ff88;
+      --badge-personal-bg: rgba(212, 255, 58, 0.12);
+      --badge-personal-text: #d4ff3a;
+      --metric-box-bg: #051209;
+      --shadow-sm: 0 0 0 1px rgba(57, 255, 136, 0.04), 0 2px 10px rgba(0, 0, 0, 0.5);
+      --shadow-md: 0 0 24px rgba(57, 255, 136, 0.12);
+      --shadow-lg: 0 0 40px rgba(57, 255, 136, 0.18);
+    }
+
+    /* Detalles propios del modo terminal */
+    [data-theme="green"] body { text-shadow: 0 0 1px rgba(57, 255, 136, 0.35); }
+    [data-theme="green"] .hero-title,
+    [data-theme="green"] .section-title,
+    [data-theme="green"] .project-title,
+    [data-theme="green"] .contact-title,
+    [data-theme="green"] .logo-text { font-family: var(--font-mono); letter-spacing: -0.04em; }
+    [data-theme="green"] .hero-title { text-shadow: 0 0 18px rgba(57, 255, 136, 0.35); }
+    [data-theme="green"] .hero-title::after {
+      content: '_'; color: var(--primary); margin-left: 0.1em;
+      animation: blink 1.1s steps(1) infinite;
+    }
+    [data-theme="green"] .logo-badge,
+    [data-theme="green"] .btn-primary,
+    [data-theme="green"] .filter-btn.active { color: #021006; }
+    [data-theme="green"] .section-tag::before { content: '> '; }
+    [data-theme="green"] .stage-img { filter: saturate(0.85) contrast(1.05); }
+    /* Líneas de barrido tipo monitor CRT */
+    [data-theme="green"] body::after {
+      content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 1000;
+      background: repeating-linear-gradient(to bottom, rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, 0) 2px, rgba(0, 0, 0, 0.18) 3px, rgba(0, 0, 0, 0) 4px);
+      mix-blend-mode: multiply;
+    }
+    [data-theme="green"] ::selection { background: var(--primary); color: #021006; }
+    @keyframes blink { 50% { opacity: 0; } }
+
+    /* ==========================================================================
+       RESET Y ESTILOS BASE
+       ========================================================================== */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; font-size: 16px; scroll-padding-top: 84px; }
+
+    body {
+      font-family: var(--font-main);
+      background-color: var(--bg-body);
+      color: var(--text-main);
+      line-height: 1.6;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+
+    a { color: inherit; text-decoration: none; transition: var(--transition); }
+    img { max-width: 100%; height: auto; display: block; }
+    button { font-family: inherit; }
+    :focus-visible { outline: 2px solid var(--primary); outline-offset: 3px; }
+
+    .container { width: 100%; max-width: var(--container-max); margin: 0 auto; padding: 0 1.5rem; }
+
+    /* ==========================================================================
+       HEADER & BARRA DE NAVEGACIÓN
+       ========================================================================== */
+    .header {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--bg-surface-glass);
+      backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .nav-container { display: flex; align-items: center; justify-content: space-between; height: 72px; }
+
+    .logo { display: flex; align-items: center; gap: 0.75rem; font-weight: 800; font-size: 1.25rem; letter-spacing: -0.02em; }
+
+    .logo-badge {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 38px; height: 38px;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      color: #fff; border-radius: var(--radius-sm);
+      font-family: var(--font-mono); font-weight: 700; font-size: 1.05rem;
+      box-shadow: 0 4px 12px var(--primary-glow);
+    }
+
+    .logo-text span { color: var(--primary); margin-left: 0.3rem; }
+
+    .nav-menu { display: flex; align-items: center; list-style: none; gap: 1.75rem; }
+
+    .nav-link { font-weight: 500; font-size: 0.95rem; color: var(--text-muted); position: relative; padding: 0.25rem 0; }
+    .nav-link:hover, .nav-link.active { color: var(--text-main); }
+    .nav-link::after {
+      content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px;
+      background: var(--primary); transition: width 0.25s ease; border-radius: 2px;
+    }
+    .nav-link:hover::after, .nav-link.active::after { width: 100%; }
+
+    .nav-actions { display: flex; align-items: center; gap: 0.75rem; }
+
+    .theme-toggle {
+      background: var(--bg-surface-elevated); border: 1px solid var(--border-color); color: var(--text-main);
+      width: 42px; height: 42px; border-radius: var(--radius-sm);
+      display: flex; align-items: center; justify-content: center; cursor: pointer; transition: var(--transition);
+    }
+    .theme-toggle:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-2px); }
+    .theme-toggle svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    /* El botón muestra el ícono del tema actual */
+    .theme-toggle svg { display: none; }
+    [data-theme="dark"] .theme-toggle .icon-moon,
+    [data-theme="light"] .theme-toggle .icon-sun,
+    [data-theme="green"] .theme-toggle .icon-term { display: block; }
+
+    .hamburger { display: none; background: transparent; border: none; color: var(--text-main); cursor: pointer; padding: 0.5rem; }
+    .hamburger svg { width: 26px; height: 26px; stroke: currentColor; stroke-width: 2.2; }
+
+    /* ==========================================================================
+       HERO
+       ========================================================================== */
+    .hero { padding: 5.5rem 0 3.5rem; position: relative; overflow: hidden; }
+
+    .hero-glow {
+      position: absolute; top: -100px; left: 50%; transform: translateX(-50%);
+      width: 650px; max-width: 100%; height: 380px;
+      background: radial-gradient(circle, var(--primary-glow) 0%, rgba(0,0,0,0) 70%);
+      pointer-events: none; z-index: 0;
+    }
+
+    .hero-content { position: relative; z-index: 1; }
+    .hero-content > .hero-pill, .hero-title, .hero-subtitle, .hero-tags { max-width: 860px; }
+
+    .hero-pill {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.4rem 1rem;
+      background: var(--badge-uade-bg); border: 1px solid var(--badge-uade-text); color: var(--badge-uade-text);
+      border-radius: var(--radius-full); font-size: 0.85rem; font-weight: 600; margin-bottom: 1.5rem;
+    }
+
+    .hero-pill-dot { width: 8px; height: 8px; border-radius: 50%; background: currentColor; animation: pulse 2s infinite ease-in-out; flex-shrink: 0; }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.85); }
+    }
+
+    .hero-title { font-size: 3.25rem; font-weight: 800; line-height: 1.15; letter-spacing: -0.03em; margin-bottom: 1.25rem; }
+    .hero-title .gradient-text {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+      -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+    }
+
+    .hero-subtitle { font-size: 1.2rem; color: var(--text-muted); line-height: 1.7; margin-bottom: 2rem; }
+
+    .hero-tags { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-bottom: 2.25rem; }
+    .hero-tag {
+      padding: 0.35rem 0.85rem; background: var(--tag-bg); border: 1px solid var(--tag-border);
+      color: var(--text-main); border-radius: var(--radius-full); font-size: 0.85rem; font-weight: 500;
+    }
+    .hero-tag.ai { border-color: var(--accent); color: var(--accent); }
+
+    .hero-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 1rem; }
+
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 0.6rem;
+      padding: 0.75rem 1.6rem; border-radius: var(--radius-sm);
+      font-weight: 600; font-size: 0.95rem; cursor: pointer; transition: var(--transition); border: none;
+    }
+    .btn-primary { background: var(--primary); color: #fff; box-shadow: 0 4px 14px var(--primary-glow); }
+    .btn-primary:hover { background: var(--primary-hover); transform: translateY(-2px); }
+    .btn-secondary { background: var(--bg-surface-elevated); color: var(--text-main); border: 1px solid var(--border-color); }
+    .btn-secondary:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-2px); }
+
+    .hero-stats {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.25rem;
+      margin-top: 3.5rem; padding-top: 2.5rem; border-top: 1px solid var(--border-color);
+    }
+    .stat-card { background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 1.25rem 1.5rem; transition: var(--transition); }
+    .stat-card:hover { border-color: var(--border-color-hover); transform: translateY(-2px); }
+    .stat-number { font-size: 2rem; font-weight: 800; color: var(--primary); font-family: var(--font-mono); line-height: 1.2; }
+    .stat-label { font-size: 0.85rem; color: var(--text-muted); margin-top: 0.35rem; font-weight: 500; }
+
+    /* ==========================================================================
+       ENCABEZADOS Y FILTROS
+       ========================================================================== */
+    .section { padding: 4.5rem 0; }
+    .section-header { margin-bottom: 2.5rem; }
+    .section-tag {
+      text-transform: uppercase; font-family: var(--font-mono); font-size: 0.8rem; font-weight: 600;
+      letter-spacing: 0.1em; color: var(--primary); margin-bottom: 0.5rem; display: inline-block;
+    }
+    .section-title { font-size: 2.25rem; font-weight: 800; letter-spacing: -0.02em; line-height: 1.2; }
+    .section-description { color: var(--text-muted); font-size: 1.05rem; margin-top: 0.5rem; max-width: 650px; }
+
+    .project-filters { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-bottom: 2.5rem; }
+    .filter-btn {
+      padding: 0.5rem 1.2rem; border-radius: var(--radius-full); font-size: 0.88rem; font-weight: 600;
+      background: var(--bg-surface); color: var(--text-muted); border: 1px solid var(--border-color);
+      cursor: pointer; transition: var(--transition);
+    }
+    .filter-btn:hover { color: var(--text-main); border-color: var(--text-muted); }
+    .filter-btn.active { background: var(--primary); color: #fff; border-color: var(--primary); box-shadow: 0 3px 10px var(--primary-glow); }
+
+    /* ==========================================================================
+       TARJETAS DE PROYECTO
+       La galería va arriba a lo ancho de la tarjeta para que las capturas se vean grandes.
+       ========================================================================== */
+    .projects-container { display: flex; flex-direction: column; gap: 3.5rem; }
+
+    .project-card {
+      background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: var(--radius-lg);
+      overflow: hidden; box-shadow: var(--shadow-sm);
+      transition: border-color 0.25s ease, box-shadow 0.25s ease, opacity 0.2s ease, transform 0.2s ease;
+    }
+    .project-card:hover { border-color: var(--border-color-hover); box-shadow: var(--shadow-md); }
+
+    /* Galería */
+    .project-visuals { background: var(--bg-surface-elevated); padding: 1.25rem 1.25rem 1rem; border-bottom: 1px solid var(--border-color); }
+
+    .stage {
+      position: relative; height: clamp(230px, 46vw, 540px);
+      border-radius: var(--radius-md); overflow: hidden;
+      background: var(--bg-stage); border: 1px solid var(--border-color); cursor: zoom-in;
+    }
+    /* Fondo difuminado con la misma imagen: rellena los costados sin dejar barras vacías */
+    .stage-bg {
+      position: absolute; inset: -40px; width: calc(100% + 80px); height: calc(100% + 80px); max-width: none;
+      object-fit: cover; filter: blur(28px) saturate(1.1); opacity: 0.55; transform: scale(1.05);
+    }
+    .stage-img {
+      position: relative; width: 100%; height: 100%; object-fit: contain;
+      transition: opacity 0.18s ease, transform 0.4s ease;
+    }
+    .stage:hover .stage-img { transform: scale(1.015); }
+
+    .stage-nav {
+      position: absolute; top: 50%; transform: translateY(-50%); z-index: 2;
+      width: 40px; height: 40px; border-radius: 50%; border: none; cursor: pointer;
+      background: rgba(0,0,0,0.6); color: #fff; display: flex; align-items: center; justify-content: center;
+      opacity: 0; transition: opacity 0.2s ease, background 0.2s ease;
+    }
+    .stage-nav svg { width: 20px; height: 20px; stroke: currentColor; stroke-width: 2.4; fill: none; }
+    .stage-nav.prev { left: 12px; }
+    .stage-nav.next { right: 12px; }
+    .stage:hover .stage-nav, .stage-nav:focus-visible { opacity: 1; }
+    .stage-nav:hover { background: var(--primary); }
+
+    .zoom-hint {
+      position: absolute; bottom: 12px; right: 12px; z-index: 2;
+      background: rgba(0, 0, 0, 0.72); color: #fff; padding: 0.35rem 0.65rem; border-radius: var(--radius-sm);
+      font-size: 0.75rem; display: flex; align-items: center; gap: 0.35rem; pointer-events: none; font-weight: 500;
+    }
+    .stage-count {
+      position: absolute; top: 12px; right: 12px; z-index: 2;
+      background: rgba(0, 0, 0, 0.72); color: #fff; padding: 0.2rem 0.6rem; border-radius: var(--radius-full);
+      font-family: var(--font-mono); font-size: 0.72rem; pointer-events: none;
+    }
+
+    .gallery-bar { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-top: 0.9rem; flex-wrap: wrap; }
+    .stage-caption { font-size: 0.88rem; color: var(--text-muted); font-weight: 500; flex: 1 1 260px; }
+
+    .gallery-thumbs { display: flex; gap: 0.55rem; overflow-x: auto; padding: 2px 2px 4px; }
+    .thumb {
+      width: 92px; height: 58px; border-radius: var(--radius-sm); overflow: hidden; flex-shrink: 0;
+      border: 2px solid var(--border-color); cursor: pointer; opacity: 0.6; transition: var(--transition);
+      background: var(--bg-stage); padding: 0;
+    }
+    .thumb img { width: 100%; height: 100%; object-fit: cover; }
+    .thumb:hover { opacity: 0.9; }
+    .thumb.active { opacity: 1; border-color: var(--primary); box-shadow: 0 2px 8px var(--primary-glow); }
+
+    /* Información */
+    .project-info { padding: 2.25rem 2.5rem 2.25rem; }
+
+    .project-head { display: flex; justify-content: space-between; gap: 1.5rem; align-items: flex-start; margin-bottom: 1.5rem; }
+    .project-num { font-family: var(--font-mono); font-size: 2.6rem; font-weight: 700; color: var(--border-color); line-height: 1; }
+
+    .project-badges { display: flex; align-items: center; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.85rem; }
+    .badge-uade, .badge-personal {
+      font-size: 0.75rem; font-weight: 700; padding: 0.25rem 0.65rem; border-radius: var(--radius-full); letter-spacing: 0.02em;
+    }
+    .badge-uade { background: var(--badge-uade-bg); color: var(--badge-uade-text); }
+    .badge-personal { background: var(--badge-personal-bg); color: var(--badge-personal-text); }
+    .badge-period { font-size: 0.78rem; color: var(--text-faint); font-family: var(--font-mono); font-weight: 500; }
+
+    .project-title { font-size: 1.75rem; font-weight: 800; line-height: 1.25; margin-bottom: 0.4rem; letter-spacing: -0.02em; }
+    .project-subtitle { font-size: 0.98rem; font-weight: 600; color: var(--primary); }
+
+    .project-body { display: grid; grid-template-columns: 1.25fr 1fr; gap: 2.25rem; }
+
+    .project-desc-block { margin-bottom: 1.25rem; }
+    .project-desc-block:last-child { margin-bottom: 0; }
+    .desc-label { font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-faint); margin-bottom: 0.35rem; }
+    .desc-text { color: var(--text-muted); font-size: 0.95rem; line-height: 1.7; }
+    .desc-list { color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; padding-left: 1.1rem; }
+    .desc-list li { margin-bottom: 0.3rem; }
+    .desc-list li::marker { color: var(--primary); }
+
+    .project-side { display: flex; flex-direction: column; gap: 1.25rem; }
+
+    .project-highlights { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+    .highlight-item { background: var(--metric-box-bg); border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 0.8rem 1rem; }
+    .highlight-item.full-width { grid-column: span 2; }
+    .highlight-val { font-family: var(--font-mono); font-size: 1.12rem; font-weight: 700; color: var(--text-main); line-height: 1.35; }
+    .highlight-val.small { font-size: 0.95rem; }
+    .highlight-val.accent-green { color: var(--green); }
+    .highlight-val.accent-blue { color: var(--primary); }
+    .highlight-desc { font-size: 0.8rem; color: var(--text-muted); margin-top: 0.25rem; line-height: 1.5; }
+
+    .tech-stack { display: flex; flex-wrap: wrap; gap: 0.45rem; padding-top: 1rem; border-top: 1px solid var(--border-color); }
+    .tech-pill {
+      font-family: var(--font-mono); font-size: 0.76rem; padding: 0.25rem 0.65rem;
+      background: var(--tag-bg); border: 1px solid var(--tag-border); color: var(--tag-text);
+      border-radius: var(--radius-sm); font-weight: 500;
+    }
+
+    /* Esquema de solución (HSM 360) */
+    .flow { margin-top: 1.75rem; padding-top: 1.5rem; border-top: 1px dashed var(--border-color); }
+    .flow-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.75rem; counter-reset: paso; }
+    .flow-step {
+      position: relative; background: var(--metric-box-bg); border: 1px solid var(--border-color);
+      border-radius: var(--radius-md); padding: 1rem 1rem 1rem 1rem;
+    }
+    .flow-step::before {
+      counter-increment: paso; content: counter(paso);
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 26px; height: 26px; border-radius: 50%; margin-bottom: 0.5rem;
+      background: var(--badge-uade-bg); color: var(--primary); font-family: var(--font-mono); font-weight: 700; font-size: 0.8rem;
+    }
+    .flow-step:not(:last-child)::after {
+      content: '→'; position: absolute; right: -0.68rem; top: 50%; transform: translateY(-50%);
+      color: var(--text-faint); font-weight: 700; z-index: 1;
+    }
+    .flow-step.key { border-color: var(--primary); box-shadow: 0 0 0 3px var(--primary-glow); }
+    .flow-step b { display: block; font-size: 0.92rem; margin-bottom: 0.2rem; }
+    .flow-step span { font-size: 0.8rem; color: var(--text-muted); line-height: 1.45; display: block; }
+
+    /* ==========================================================================
+       HABILIDADES & FORMACIÓN
+       ========================================================================== */
+    .skills-education-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 2rem; }
+
+    .glass-card { background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 2.25rem; box-shadow: var(--shadow-sm); }
+
+    .card-title-row { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.75rem; }
+    .card-title-row h3 { font-size: 1.35rem; font-weight: 800; }
+    .card-title-row p { font-size: 0.85rem; color: var(--text-muted); }
+    .card-icon {
+      width: 44px; height: 44px; border-radius: var(--radius-sm); flex-shrink: 0;
+      background: var(--badge-uade-bg); color: var(--primary); display: flex; align-items: center; justify-content: center;
+    }
+    .card-icon svg { width: 24px; height: 24px; stroke: currentColor; stroke-width: 2; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+
+    .skills-group { margin-bottom: 1.5rem; }
+    .skills-group:last-child { margin-bottom: 0; }
+    .skills-group-title { font-size: 0.95rem; font-weight: 700; color: var(--text-main); margin-bottom: 0.65rem; }
+    .skills-badges { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .skill-badge {
+      font-size: 0.85rem; padding: 0.4rem 0.85rem; background: var(--bg-surface-elevated);
+      border: 1px solid var(--border-color); border-radius: var(--radius-full); color: var(--text-muted); font-weight: 500; transition: var(--transition);
+    }
+    .skill-badge:hover { border-color: var(--primary); color: var(--text-main); transform: translateY(-2px); }
+
+    /* Bloque destacado: IA y entregables */
+    .strengths { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 2rem; }
+    .strength-card {
+      position: relative; overflow: hidden;
+      background: linear-gradient(160deg, var(--bg-surface) 0%, var(--bg-surface-elevated) 100%);
+      border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 2.25rem; box-shadow: var(--shadow-sm);
+    }
+    .strength-card::before {
+      content: ''; position: absolute; top: -80px; right: -80px; width: 220px; height: 220px; border-radius: 50%;
+      background: radial-gradient(circle, var(--primary-glow) 0%, rgba(0,0,0,0) 70%); pointer-events: none;
+    }
+    .strength-card.ai { border-color: color-mix(in srgb, var(--accent) 45%, var(--border-color)); }
+    .strength-card.ai .card-icon { background: color-mix(in srgb, var(--accent) 16%, transparent); color: var(--accent); }
+    .strength-card p.lead { color: var(--text-muted); font-size: 0.97rem; line-height: 1.7; margin-bottom: 1.25rem; }
+    .check-list { list-style: none; display: grid; gap: 0.6rem; margin-bottom: 1.25rem; }
+    .check-list li { display: flex; gap: 0.6rem; font-size: 0.92rem; color: var(--text-muted); line-height: 1.5; }
+    .check-list li::before { content: '✓'; color: var(--green); font-weight: 800; flex-shrink: 0; }
+    .check-list b { color: var(--text-main); font-weight: 600; }
+
+    .deliverables { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.6rem; margin-bottom: 1.25rem; }
+    .deliverable { display: flex; align-items: center; gap: 0.6rem; background: var(--metric-box-bg); border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 0.6rem 0.8rem; font-size: 0.86rem; color: var(--text-main); font-weight: 500; }
+    .deliverable svg { width: 18px; height: 18px; stroke: var(--primary); stroke-width: 2; fill: none; flex-shrink: 0; }
+    .big-number { display: flex; align-items: baseline; gap: 0.6rem; }
+    .big-number b { font-family: var(--font-mono); font-size: 2rem; color: var(--primary); }
+    .big-number span { font-size: 0.88rem; color: var(--text-muted); }
+
+    /* Timeline de Educación */
+    .timeline { position: relative; padding-left: 2rem; }
+    .timeline::before { content: ''; position: absolute; top: 6px; bottom: 6px; left: 7px; width: 2px; background: var(--border-color); }
+    .timeline-item { position: relative; margin-bottom: 2rem; }
+    .timeline-item:last-child { margin-bottom: 0; }
+    .timeline-dot { position: absolute; left: -2rem; top: 5px; width: 16px; height: 16px; border-radius: 50%; background: var(--primary); border: 3px solid var(--bg-surface); box-shadow: 0 0 0 2px var(--primary); }
+    .timeline-period { font-family: var(--font-mono); font-size: 0.8rem; color: var(--primary); font-weight: 600; margin-bottom: 0.25rem; }
+    .timeline-degree { font-size: 1.1rem; font-weight: 700; color: var(--text-main); }
+    .timeline-institution { font-size: 0.95rem; color: var(--text-muted); margin-bottom: 0.5rem; }
+    .timeline-details { font-size: 0.88rem; color: var(--text-muted); line-height: 1.6; }
+    .timeline-details li { margin-bottom: 0.35rem; list-style: none; }
+    .timeline-details strong { color: var(--text-main); }
+
+    /* ==========================================================================
+       CONTACTO
+       ========================================================================== */
+    .contact-section { margin-top: 3rem; padding: 4.5rem 0; background: var(--bg-surface-elevated); border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color); }
+    .contact-box { max-width: 900px; margin: 0 auto; text-align: center; }
+    .contact-title { font-size: 2.25rem; font-weight: 800; margin-bottom: 1rem; line-height: 1.2; }
+    .contact-desc { color: var(--text-muted); font-size: 1.05rem; margin: 0 auto 2.5rem; max-width: 640px; }
+    .contact-links { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; text-align: left; }
+    .contact-card {
+      display: flex; align-items: center; gap: 0.85rem; padding: 1rem 1.2rem;
+      background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: var(--radius-md);
+      color: var(--text-main); transition: var(--transition); min-width: 0;
+    }
+    .contact-card:hover { border-color: var(--primary); transform: translateY(-3px); box-shadow: var(--shadow-sm); }
+    .contact-card svg { width: 22px; height: 22px; stroke: var(--primary); stroke-width: 2; fill: none; flex-shrink: 0; stroke-linecap: round; stroke-linejoin: round; }
+    .contact-card div { min-width: 0; }
+    .contact-card b { display: block; font-size: 0.95rem; }
+    .contact-card span { display: block; font-size: 0.8rem; color: var(--text-muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+    /* ==========================================================================
+       FOOTER
+       ========================================================================== */
+    .footer { padding: 2.5rem 0; text-align: center; color: var(--text-faint); font-size: 0.9rem; }
+    .footer p { margin-bottom: 0.4rem; }
+
+    /* ==========================================================================
+       LIGHTBOX
+       ========================================================================== */
+    .lightbox-modal {
+      position: fixed; inset: 0; background: rgba(0, 0, 0, 0.92); backdrop-filter: blur(8px);
+      z-index: 999; display: none; align-items: center; justify-content: center; padding: 2rem;
+    }
+    .lightbox-modal.active { display: flex; }
+    .lightbox-content { position: relative; max-width: 92vw; max-height: 90vh; display: flex; flex-direction: column; align-items: center; }
+    .lightbox-img { max-width: 88vw; max-height: 80vh; object-fit: contain; border-radius: var(--radius-sm); box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8); border: 1px solid #334155; }
+    .lightbox-caption { color: #e2e8f0; margin-top: 1rem; font-size: 1rem; font-weight: 500; text-align: center; max-width: 80ch; }
+    .lightbox-btn {
+      position: absolute; background: rgba(255, 255, 255, 0.1); border: none; color: #fff;
+      width: 48px; height: 48px; border-radius: 50%; cursor: pointer;
+      display: flex; align-items: center; justify-content: center; transition: var(--transition);
+    }
+    .lightbox-btn:hover { background: rgba(255, 255, 255, 0.25); }
+    .lightbox-btn svg { width: 24px; height: 24px; stroke: currentColor; stroke-width: 2.2; fill: none; }
+    .lightbox-close { top: 1.5rem; right: 2rem; }
+    .lightbox-prev { left: 1.5rem; top: 50%; transform: translateY(-50%); }
+    .lightbox-next { right: 1.5rem; top: 50%; transform: translateY(-50%); }
+
+    /* Aparición suave al hacer scroll */
+    .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; transition: none; }
+      html { scroll-behavior: auto; }
+      .hero-pill-dot, [data-theme="green"] .hero-title::after { animation: none; }
+    }
+
+    /* ==========================================================================
+       RESPONSIVE
+       ========================================================================== */
+    @media (max-width: 992px) {
+      .project-body, .skills-education-grid, .strengths { grid-template-columns: 1fr; }
+      .flow-steps { grid-template-columns: 1fr 1fr; }
+      .flow-step:nth-child(2)::after { display: none; }
+    }
+
+    @media (max-width: 768px) {
+      .hero { padding-top: 3.5rem; }
+      .hero-title { font-size: 2.2rem; }
+      .section-title, .contact-title { font-size: 1.8rem; }
+
+      .nav-menu {
+        position: fixed; top: 72px; left: 0; width: 100%;
+        background: var(--bg-surface); border-bottom: 1px solid var(--border-color);
+        flex-direction: column; padding: 1.5rem; gap: 1.25rem; display: none; box-shadow: var(--shadow-md);
+      }
+      .nav-menu.open { display: flex; }
+      .hamburger { display: block; }
+
+      .project-info { padding: 1.5rem; }
+      .project-visuals { padding: 0.85rem; }
+      .project-num { display: none; }
+      .project-title { font-size: 1.4rem; }
+      .project-highlights, .deliverables { grid-template-columns: 1fr; }
+      .highlight-item.full-width { grid-column: span 1; }
+      .stage-nav { opacity: 1; width: 34px; height: 34px; }
+      .glass-card, .strength-card { padding: 1.5rem; }
+      .lightbox-prev { left: 0.5rem; }
+      .lightbox-next { right: 0.5rem; }
+    }
+
+    @media (max-width: 520px) {
+      .flow-steps { grid-template-columns: 1fr; }
+      .flow-step::after { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==========================================================================
+       HEADER & NAVEGACIÓN
+       ========================================================================== -->
+  <header class="header">
+    <div class="container nav-container">
+      <a href="#inicio" class="logo" aria-label="Ir al inicio">
+        <div class="logo-badge">NM</div>
+        <div class="logo-text">Nicolás<span>Martínez</span></div>
+      </a>
+
+      <nav aria-label="Navegación principal">
+        <ul class="nav-menu" id="navMenu">
+          <li><a href="#inicio" class="nav-link active">Inicio</a></li>
+          <li><a href="#proyectos" class="nav-link">Proyectos</a></li>
+          <li><a href="#habilidades" class="nav-link">Habilidades</a></li>
+          <li><a href="#formacion" class="nav-link">Formación</a></li>
+          <li><a href="#contacto" class="nav-link">Contacto</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="theme-toggle" id="themeToggle" aria-label="Cambiar tema" title="Cambiar tema">
+          <svg class="icon-sun" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+          <svg class="icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+          <svg class="icon-term" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="M6 9l3 3-3 3M12 15h6"></path></svg>
+        </button>
+
+        <button class="hamburger" id="hamburgerBtn" aria-label="Abrir menú" aria-expanded="false" aria-controls="navMenu">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M4 6h16M4 12h16M4 18h16"></path></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- ==========================================================================
+         HERO
+         ========================================================================== -->
+    <section class="hero" id="inicio">
+      <div class="hero-glow"></div>
+      <div class="container hero-content">
+        <div class="hero-pill">
+          <span class="hero-pill-dot"></span>
+          Estudiante de Lic. en Gestión de Tecnología de la Información — UADE
+        </div>
+
+        <h1 class="hero-title">
+          Conectando la <span class="gradient-text">gestión de TI</span> con el desarrollo de software.
+        </h1>
+
+        <p class="hero-subtitle">
+          Proyectos académicos y personales de análisis de sistemas, algoritmos y desarrollo web. Me enfoco en entender el problema del negocio, documentarlo bien y llegar a una solución concreta, apoyándome en herramientas de inteligencia artificial para trabajar más rápido y con mejor calidad.
+        </p>
+
+        <div class="hero-tags">
+          <span class="hero-tag">Análisis de Sistemas & Requerimientos</span>
+          <span class="hero-tag">Python & Algoritmos</span>
+          <span class="hero-tag">Desarrollo Web (Flask / FastAPI)</span>
+          <span class="hero-tag">Diseño UI & Prototipado</span>
+          <span class="hero-tag ai">IA aplicada al trabajo</span>
+        </div>
+
+        <div class="hero-actions">
+          <a href="#proyectos" class="btn btn-primary">
+            Explorar proyectos
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+          <a href="#contacto" class="btn btn-secondary">Contacto</a>
+        </div>
+
+        <div class="hero-stats">
+          <div class="stat-card">
+            <div class="stat-number">5</div>
+            <div class="stat-label">Proyectos documentados</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">15</div>
+            <div class="stat-label">Entregables formales producidos</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">4</div>
+            <div class="stat-label">Materias de la carrera aplicadas</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">+25%</div>
+            <div class="stat-label">Meta comercial modelada (HSM 360)</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         PROYECTOS
+         ========================================================================== -->
+    <section class="section" id="proyectos">
+      <div class="container">
+
+        <div class="section-header">
+          <span class="section-tag">Portfolio seleccionado</span>
+          <h2 class="section-title">Proyectos destacados</h2>
+          <p class="section-description">
+            Casos de estudio que van del relevamiento de un negocio real al diseño de algoritmos y al desarrollo de aplicaciones web funcionales.
+          </p>
+        </div>
+
+        <div class="project-filters" role="group" aria-label="Filtrar proyectos">
+          <button class="filter-btn active" data-filter="all">Todos (5)</button>
+          <button class="filter-btn" data-filter="gestion">Gestión & Análisis</button>
+          <button class="filter-btn" data-filter="algoritmos">Algoritmos</button>
+          <button class="filter-btn" data-filter="web">Desarrollo Web & Software</button>
+        </div>
+
+        <div class="projects-container">
+
+          <!-- ====================================================================
+               PROYECTO 1: HSM 360
+               ==================================================================== -->
+          <article class="project-card reveal" data-category="gestion">
+            <div class="project-visuals" data-gallery>
+              <button class="thumb active" data-src="img/hsm-1.jpg" data-caption="Prototipo: página de inicio del sitio con acceso al nuevo corralón"><img src="img/hsm-1.jpg" alt="Prototipo de la página de inicio" loading="lazy" /></button>
+              <button class="thumb" data-src="img/hsm-2.jpg" data-caption="Prototipo: catálogo del corralón digital (cemento y áridos)"><img src="img/hsm-2.jpg" alt="Prototipo del catálogo" loading="lazy" /></button>
+              <button class="thumb" data-src="img/hsm-3.jpg" data-caption="Prototipo: ficha de producto con consulta por WhatsApp y pedido de presupuesto"><img src="img/hsm-3.jpg" alt="Prototipo de ficha de producto" loading="lazy" /></button>
+              <button class="thumb" data-src="img/hsm-4.jpg" data-caption="Prototipo: formulario para pedir presupuesto online"><img src="img/hsm-4.jpg" alt="Prototipo del formulario de presupuesto" loading="lazy" /></button>
+              <button class="thumb" data-src="img/hsm-5.jpg" data-caption="Prototipo: confirmación de envío del pedido"><img src="img/hsm-5.jpg" alt="Prototipo de confirmación" loading="lazy" /></button>
+            </div>
+
+            <div class="project-info">
+              <div class="project-head">
+                <div>
+                  <div class="project-badges">
+                    <span class="badge-uade">Proyecto grupal UADE</span>
+                    <span class="badge-period">Sistemas de Información II • 2º cuat. 2025</span>
+                  </div>
+                  <h3 class="project-title">HSM 360 – Transformación digital & logística</h3>
+                  <div class="project-subtitle">Nueva unidad de negocio de corralón para una distribuidora de hierros</div>
+                </div>
+                <div class="project-num" aria-hidden="true">01</div>
+              </div>
+
+              <div class="project-body">
+                <div>
+                  <div class="project-desc-block">
+                    <div class="desc-label">Diagnóstico del problema</div>
+                    <p class="desc-text">
+                      Análisis de Hierros San Martín (Caseros, Buenos Aires), una distribuidora familiar que sumaba materiales de construcción a su oferta. Se relevaron los problemas principales: stock sin integrar ni en tiempo real, imposibilidad de presupuestar hierro y materiales juntos, entregas tercerizadas sin trazabilidad y errores en la preparación de pedidos grandes.
+                    </p>
+                  </div>
+                  <div class="project-desc-block">
+                    <div class="desc-label">Propuesta de solución</div>
+                    <p class="desc-text">
+                      Un Sistema de Gestión de Almacenes (SGA) integrado al ERP existente, un corralón digital con presupuestos online y seguimiento de envíos con códigos QR. Con Design Thinking se definieron dos propuestas de valor: el <em>"Selector de Velocidad de Obra"</em> (entrega urgente garantizada) y el <em>"HSM Pack de Obra"</em> (kit completo de materiales por tipo de trabajo).
+                    </p>
+                  </div>
+                </div>
+
+                <div class="project-side">
+                  <div class="project-highlights">
+                    <div class="highlight-item">
+                      <div class="highlight-val accent-green">+25%</div>
+                      <div class="highlight-desc">Meta de aumento de ventas planteada por la empresa</div>
+                    </div>
+                    <div class="highlight-item">
+                      <div class="highlight-val">139 h</div>
+                      <div class="highlight-desc">Esfuerzo del proyecto presupuestado a USD 30/h</div>
+                    </div>
+                    <div class="highlight-item full-width">
+                      <div class="highlight-val small">10 entregables de análisis</div>
+                      <div class="highlight-desc">Requerimientos de negocio, encuesta y cuestionario, FODA, DFD, casos de uso, matriz de trazabilidad, Design Thinking, plan de marketing, presupuesto y prototipos de pantallas.</div>
+                    </div>
+                  </div>
+                  <div class="tech-stack">
+                    <span class="tech-pill">Ingeniería de requerimientos</span>
+                    <span class="tech-pill">ERP / SGA</span>
+                    <span class="tech-pill">DFD</span>
+                    <span class="tech-pill">Casos de uso</span>
+                    <span class="tech-pill">Design Thinking</span>
+                    <span class="tech-pill">Prototipado</span>
+                    <span class="tech-pill">FODA</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="flow">
+                <div class="desc-label" style="margin-bottom:0.85rem;">Cómo funciona la solución propuesta</div>
+                <div class="flow-steps">
+                  <div class="flow-step"><b>Cliente</b><span>Consulta el catálogo del corralón digital</span></div>
+                  <div class="flow-step"><b>Presupuesto online</b><span>Hierros y materiales en una sola cotización</span></div>
+                  <div class="flow-step key"><b>SGA + ERP</b><span>Stock en tiempo real de los dos depósitos</span></div>
+                  <div class="flow-step"><b>Entrega con QR</b><span>Seguimiento del envío hasta la obra</span></div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- ====================================================================
+               PROYECTO 2: ROBOT UNITREE (GREEDY)
+               ==================================================================== -->
+          <article class="project-card reveal" data-category="algoritmos">
+            <div class="project-visuals" data-gallery>
+              <button class="thumb active" data-src="img/greedy-1.jpg" data-caption="Mapa 1: el robot llega por el camino más corto, en 8 movimientos"><img src="img/greedy-1.jpg" alt="Ruta del robot en el mapa 1" loading="lazy" /></button>
+              <button class="thumb" data-src="img/greedy-2.jpg" data-caption="Mapa 2: llega, pero da un rodeo (20 movimientos contra 12 del camino mínimo)"><img src="img/greedy-2.jpg" alt="Ruta del robot en el mapa 2" loading="lazy" /></button>
+              <button class="thumb" data-src="img/greedy-3.jpg" data-caption="Mapa 3: queda bloqueado en (6,4) aunque existía un camino de 16 movimientos"><img src="img/greedy-3.jpg" alt="Ruta del robot en el mapa 3" loading="lazy" /></button>
+            </div>
+
+            <div class="project-info">
+              <div class="project-head">
+                <div>
+                  <div class="project-badges">
+                    <span class="badge-uade">Proyecto grupal UADE</span>
+                    <span class="badge-period">Diseño y Análisis de Algoritmos • 2026</span>
+                  </div>
+                  <h3 class="project-title">Robot Unitree – Navegación con algoritmo Greedy</h3>
+                  <div class="project-subtitle">Búsqueda de caminos en una grilla con obstáculos y zonas prohibidas</div>
+                </div>
+                <div class="project-num" aria-hidden="true">02</div>
+              </div>
+
+              <div class="project-body">
+                <div>
+                  <div class="project-desc-block">
+                    <div class="desc-label">El algoritmo</div>
+                    <p class="desc-text">
+                      Programa en Python que lee un mapa en formato JSON y guía a un robot Unitree desde el inicio hasta el destino. En cada paso elige la casilla vecina más cercana al objetivo según la distancia Manhattan, con una regla fija de desempate (arriba, derecha, abajo, izquierda) y un límite de pasos. Termina informando si llegó, si quedó bloqueado o si agotó los pasos.
+                    </p>
+                  </div>
+                  <div class="project-desc-block">
+                    <div class="desc-label">Del recorrido al robot</div>
+                    <p class="desc-text">
+                      La ruta se traduce a instrucciones de movimiento ("avanzar 0,50 m", "girar 90°") que se envían al simulador del robot como velocidad y tiempo, y cada ejecución queda registrada en logs. El informe analiza la complejidad, O(P) en la cantidad de pasos, y compara la estrategia con BFS.
+                    </p>
+                  </div>
+                </div>
+
+                <div class="project-side">
+                  <div class="project-highlights">
+                    <div class="highlight-item">
+                      <div class="highlight-val accent-green">Mapa 1: 8 / 8</div>
+                      <div class="highlight-desc">Encuentra el camino óptimo</div>
+                    </div>
+                    <div class="highlight-item">
+                      <div class="highlight-val">Mapa 2: 20 / 12</div>
+                      <div class="highlight-desc">Llega con un 67% más de movimientos por la regla de desempate</div>
+                    </div>
+                    <div class="highlight-item full-width">
+                      <div class="highlight-val small">Mapa 3: bloqueo y análisis crítico</div>
+                      <div class="highlight-desc">Greedy elige la casilla que "parece" más cerca, entra en un callejón sin salida y no puede volver atrás. El análisis muestra por qué una búsqueda global como BFS sí encuentra la solución.</div>
+                    </div>
+                  </div>
+                  <div class="tech-stack">
+                    <span class="tech-pill">Python</span>
+                    <span class="tech-pill">Algoritmos Greedy</span>
+                    <span class="tech-pill">Distancia Manhattan</span>
+                    <span class="tech-pill">Complejidad</span>
+                    <span class="tech-pill">JSON</span>
+                    <span class="tech-pill">Simulación</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- ====================================================================
+               PROYECTO 3: CHEBURGA
+               ==================================================================== -->
+          <article class="project-card reveal" data-category="web">
+            <div class="project-visuals" data-gallery>
+              <button class="thumb active" data-src="img/cheburga-index.jpg" data-caption="Inicio: portada con video de fondo y llamados a la acción"><img src="img/cheburga-index.jpg" alt="Página de inicio de CheBurga" loading="lazy" /></button>
+              <button class="thumb" data-src="img/cheburga-menu.jpg" data-caption="Menú: carta de hamburguesas con fotos y descripción"><img src="img/cheburga-menu.jpg" alt="Página del menú" loading="lazy" /></button>
+              <button class="thumb" data-src="img/cheburga-pedir.jpg" data-caption="Pedir: selección de productos y cantidades para armar el pedido"><img src="img/cheburga-pedir.jpg" alt="Página de pedidos" loading="lazy" /></button>
+              <button class="thumb" data-src="img/cheburga-nosotros.jpg" data-caption="Nosotros: historia de la marca"><img src="img/cheburga-nosotros.jpg" alt="Página Nosotros" loading="lazy" /></button>
+              <button class="thumb" data-src="img/cheburga-contacto.jpg" data-caption="Contacto: formulario con validación y canales directos"><img src="img/cheburga-contacto.jpg" alt="Página de contacto" loading="lazy" /></button>
+              <button class="thumb" data-src="img/cheburga-marca.jpg" data-caption="Identidad visual del local creada para el proyecto"><img src="img/cheburga-marca.jpg" alt="Imagen de marca del local" loading="lazy" /></button>
+            </div>
+
+            <div class="project-info">
+              <div class="project-head">
+                <div>
+                  <div class="project-badges">
+                    <span class="badge-uade">Proyecto grupal UADE</span>
+                    <span class="badge-period">Diseño y Desarrollo Web • 1º cuat. 2025</span>
+                  </div>
+                  <h3 class="project-title">CheBurga – Sitio web gastronómico</h3>
+                  <div class="project-subtitle">Sitio comercial multipágina con identidad de marca propia</div>
+                </div>
+                <div class="project-num" aria-hidden="true">03</div>
+              </div>
+
+              <div class="project-body">
+                <div>
+                  <div class="project-desc-block">
+                    <div class="desc-label">Estructura del sitio</div>
+                    <p class="desc-text">
+                      Sitio de 6 páginas para una hamburguesería de identidad argentina: Inicio, Menú, Nosotros, Ubicación, Contacto y Pedir. El recorrido está pensado para que el usuario conozca la marca, vea la carta y termine haciendo un pedido.
+                    </p>
+                  </div>
+                  <div class="project-desc-block">
+                    <div class="desc-label">Componentes</div>
+                    <ul class="desc-list">
+                      <li>Portada con video de fondo y carruseles de productos.</li>
+                      <li>Formulario de pedido con selección de cantidades.</li>
+                      <li>Formulario de contacto con validación de campos.</li>
+                      <li>Mapa embebido con la ubicación del local.</li>
+                      <li>Diseño responsive con Bootstrap 5 y estilos propios.</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="project-side">
+                  <div class="project-highlights">
+                    <div class="highlight-item">
+                      <div class="highlight-val accent-green">6 páginas</div>
+                      <div class="highlight-desc">Navegación completa y consistente</div>
+                    </div>
+                    <div class="highlight-item">
+                      <div class="highlight-val">Responsive</div>
+                      <div class="highlight-desc">Se adapta a celular, tablet y escritorio</div>
+                    </div>
+                  </div>
+                  <div class="tech-stack">
+                    <span class="tech-pill">HTML5</span>
+                    <span class="tech-pill">CSS3</span>
+                    <span class="tech-pill">Bootstrap 5</span>
+                    <span class="tech-pill">JavaScript</span>
+                    <span class="tech-pill">Diseño responsive</span>
+                    <span class="tech-pill">UX</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- ====================================================================
+               PROYECTO 4: TRACKER DE HÁBITOS
+               ==================================================================== -->
+          <article class="project-card reveal" data-category="web">
+            <div class="project-visuals" data-gallery>
+              <button class="thumb active" data-src="img/tracker-app.jpg" data-caption="Aplicación web: hábitos, rachas, acciones y gráficos en una sola pantalla"><img src="img/tracker-app.jpg" alt="Pantalla de la aplicación web" loading="lazy" /></button>
+              <button class="thumb" data-src="img/tracker-barras.jpg" data-caption="Gráfico de barras: porcentaje de cumplimiento por hábito, generado con Matplotlib"><img src="img/tracker-barras.jpg" alt="Gráfico de barras" loading="lazy" /></button>
+              <button class="thumb" data-src="img/tracker-torta.jpg" data-caption="Gráfico de torta: proporción total de cumplimiento"><img src="img/tracker-torta.jpg" alt="Gráfico de torta" loading="lazy" /></button>
+            </div>
+
+            <div class="project-info">
+              <div class="project-head">
+                <div>
+                  <div class="project-badges">
+                    <span class="badge-uade">Proyecto grupal UADE</span>
+                    <span class="badge-period">Programación 2 • 2025</span>
+                  </div>
+                  <h3 class="project-title">Tracker de hábitos & analítica</h3>
+                  <div class="project-subtitle">De programa de consola a aplicación web con gráficos</div>
+                </div>
+                <div class="project-num" aria-hidden="true">04</div>
+              </div>
+
+              <div class="project-body">
+                <div>
+                  <div class="project-desc-block">
+                    <div class="desc-label">Evolución del proyecto</div>
+                    <p class="desc-text">
+                      Empezó como un programa de consola en Python y evolucionó a una aplicación web en dos versiones, una con Flask y otra con FastAPI, con plantillas Jinja2, datos guardados en JSON y endpoints que devuelven la información en formato JSON.
+                    </p>
+                  </div>
+                  <div class="project-desc-block">
+                    <div class="desc-label">Funcionalidades</div>
+                    <ul class="desc-list">
+                      <li>Alta, edición y baja de hábitos, marcando cada día como cumplido o no.</li>
+                      <li>Cálculo de racha actual y racha máxima de cada hábito.</li>
+                      <li>Plan semanal ordenado por día y hora, con validación del formato HH:MM.</li>
+                      <li>Historial y gráficos de barras y torta generados en el servidor con Matplotlib.</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="project-side">
+                  <div class="project-highlights">
+                    <div class="highlight-item">
+                      <div class="highlight-val accent-blue">Flask & FastAPI</div>
+                      <div class="highlight-desc">Dos implementaciones web del mismo sistema</div>
+                    </div>
+                    <div class="highlight-item">
+                      <div class="highlight-val">3 versiones</div>
+                      <div class="highlight-desc">Consola, web con Flask y web con FastAPI</div>
+                    </div>
+                  </div>
+                  <div class="tech-stack">
+                    <span class="tech-pill">Python</span>
+                    <span class="tech-pill">Flask</span>
+                    <span class="tech-pill">FastAPI</span>
+                    <span class="tech-pill">Jinja2</span>
+                    <span class="tech-pill">Matplotlib</span>
+                    <span class="tech-pill">JSON</span>
+                    <span class="tech-pill">API</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- ====================================================================
+               PROYECTO 5: ATELIER MERIDIAN
+               ==================================================================== -->
+          <article class="project-card reveal" data-category="web">
+            <div class="project-visuals" data-gallery>
+              <button class="thumb active" data-src="img/atelier-portada.jpg" data-caption="Portada: tipografía editorial, partículas animadas y cursor personalizado"><img src="img/atelier-portada.jpg" alt="Portada de Atelier Meridian" loading="lazy" /></button>
+              <button class="thumb" data-src="img/atelier-estudio.jpg" data-caption="Estudio: presentación del atelier con datos clave y navegación que marca la sección activa"><img src="img/atelier-estudio.jpg" alt="Sección Estudio" loading="lazy" /></button>
+              <button class="thumb" data-src="img/atelier-proyectos.jpg" data-caption="Proyectos: galería con efecto al pasar el mouse y botón &quot;Ver proyecto&quot;"><img src="img/atelier-proyectos.jpg" alt="Sección Proyectos" loading="lazy" /></button>
+              <button class="thumb" data-src="img/atelier-contacto.jpg" data-caption="Contacto y pie de página: datos del estudio, newsletter y logotipo tipográfico"><img src="img/atelier-contacto.jpg" alt="Sección Contacto y pie de página" loading="lazy" /></button>
+            </div>
+
+            <div class="project-info">
+              <div class="project-head">
+                <div>
+                  <div class="project-badges">
+                    <span class="badge-personal">Proyecto personal</span>
+                    <span class="badge-period">Frontend & UI • 2026</span>
+                  </div>
+                  <h3 class="project-title">Atelier Meridian – Arquitectura & interiorismo</h3>
+                  <div class="project-subtitle">Sitio editorial para un estudio de diseño ficticio</div>
+                </div>
+                <div class="project-num" aria-hidden="true">05</div>
+              </div>
+
+              <div class="project-body">
+                <div>
+                  <div class="project-desc-block">
+                    <div class="desc-label">Concepto</div>
+                    <p class="desc-text">
+                      Sitio de presentación para un estudio boutique de arquitectura e interiores, con estética editorial: tipografía serif, paleta cálida en bronce y un recorrido por estudio, proyectos, servicios, proceso y contacto. Pensado como ejercicio de dirección de arte y diseño de interfaz.
+                    </p>
+                  </div>
+                  <div class="project-desc-block">
+                    <div class="desc-label">Construcción</div>
+                    <p class="desc-text">
+                      Un único archivo HTML de unos 100 KB, sin frameworks: CSS propio con variables, JavaScript nativo y una librería liviana para el scroll suave. Incluye modo claro y oscuro que se recuerda entre visitas, animaciones al hacer scroll que respetan la preferencia de movimiento reducido y diseño adaptable a cualquier pantalla.
+                    </p>
+                  </div>
+                </div>
+
+                <div class="project-side">
+                  <div class="project-highlights">
+                    <div class="highlight-item">
+                      <div class="highlight-val accent-green">~100 KB</div>
+                      <div class="highlight-desc">Un solo archivo, carga rápida</div>
+                    </div>
+                    <div class="highlight-item">
+                      <div class="highlight-val">Claro / oscuro</div>
+                      <div class="highlight-desc">Tema con variables CSS y preferencia guardada</div>
+                    </div>
+                  </div>
+                  <div class="tech-stack">
+                    <span class="tech-pill">HTML5</span>
+                    <span class="tech-pill">CSS custom properties</span>
+                    <span class="tech-pill">JavaScript</span>
+                    <span class="tech-pill">Accesibilidad</span>
+                    <span class="tech-pill">Dirección de arte</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         HABILIDADES Y FORMACIÓN
+         ========================================================================== -->
+    <section class="section" id="habilidades">
+      <div class="container">
+
+        <div class="section-header">
+          <span class="section-tag">Competencias & trayectoria</span>
+          <h2 class="section-title">Habilidades & formación</h2>
+          <p class="section-description">
+            Herramientas metodológicas y técnicas que fui aplicando a lo largo de la carrera y en estos proyectos.
+          </p>
+        </div>
+
+        <!-- Fortalezas destacadas: IA y entregables -->
+        <div class="strengths">
+          <div class="strength-card ai reveal">
+            <div class="card-title-row">
+              <div class="card-icon">
+                <svg viewBox="0 0 24 24"><path d="M12 3l1.9 4.6L18.5 9.5l-4.6 1.9L12 16l-1.9-4.6L5.5 9.5l4.6-1.9z"></path><path d="M19 15l.9 2.1L22 18l-2.1.9L19 21l-.9-2.1L16 18l2.1-.9z"></path></svg>
+              </div>
+              <div>
+                <h3>IA aplicada al trabajo</h3>
+                <p>Uso intensivo y diario</p>
+              </div>
+            </div>
+            <p class="lead">
+              Uso herramientas de inteligencia artificial generativa como parte de mi forma de trabajar: me permiten producir más, iterar más rápido y llegar a mejores resultados. Siempre reviso, corrijo y valido lo que generan.
+            </p>
+            <ul class="check-list">
+              <li><span><b>Investigación y análisis:</b> relevar un tema, resumir material y ordenar ideas.</span></li>
+              <li><span><b>Documentación:</b> redactar, estructurar y revisar informes y entregables.</span></li>
+              <li><span><b>Desarrollo:</b> programar, depurar errores y entender código más rápido.</span></li>
+              <li><span><b>Diseño:</b> prototipar interfaces y explorar alternativas visuales.</span></li>
+            </ul>
+            <div class="skills-badges">
+              <span class="skill-badge">IA generativa</span>
+              <span class="skill-badge">Prompting</span>
+              <span class="skill-badge">Asistentes de código</span>
+              <span class="skill-badge">Automatización de tareas</span>
+              <span class="skill-badge">Validación de resultados</span>
+            </div>
+          </div>
+
+          <div class="strength-card reveal">
+            <div class="card-title-row">
+              <div class="card-icon">
+                <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><path d="M14 2v6h6M9 13h6M9 17h6"></path></svg>
+              </div>
+              <div>
+                <h3>Entregables & documentación</h3>
+                <p>Del análisis al documento final</p>
+              </div>
+            </div>
+            <p class="lead">
+              Tengo mucha práctica produciendo entregables formales, claros y completos, tanto en equipo como de forma individual.
+            </p>
+            <div class="deliverables">
+              <div class="deliverable"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"></path><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>Informes técnicos</div>
+              <div class="deliverable"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"></path><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>Requerimientos</div>
+              <div class="deliverable"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"></path><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>Casos de uso</div>
+              <div class="deliverable"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"></path><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>Diagramas (DFD)</div>
+              <div class="deliverable"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"></path><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>Encuestas y relevamientos</div>
+              <div class="deliverable"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"></path><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>Análisis FODA</div>
+              <div class="deliverable"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"></path><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>Presupuestos</div>
+              <div class="deliverable"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"></path><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>Planes de marketing</div>
+              <div class="deliverable"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"></path><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>Prototipos de pantallas</div>
+              <div class="deliverable"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"></path><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>Instructivos y logs</div>
+            </div>
+            <div class="big-number"><b>15</b><span>entregables formales en los proyectos de este portfolio</span></div>
+          </div>
+        </div>
+
+        <div class="skills-education-grid">
+
+          <!-- Habilidades técnicas -->
+          <div class="glass-card reveal">
+            <div class="card-title-row">
+              <div class="card-icon">
+                <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg>
+              </div>
+              <div>
+                <h3>Habilidades técnicas</h3>
+                <p>Áreas de conocimiento y herramientas</p>
+              </div>
+            </div>
+
+            <div class="skills-group">
+              <div class="skills-group-title">Gestión de TI & análisis de sistemas</div>
+              <div class="skills-badges">
+                <span class="skill-badge">Ingeniería de requerimientos</span>
+                <span class="skill-badge">Relevamiento de procesos</span>
+                <span class="skill-badge">DFD</span>
+                <span class="skill-badge">Casos de uso & trazabilidad</span>
+                <span class="skill-badge">ERP / SGA</span>
+                <span class="skill-badge">Design Thinking</span>
+                <span class="skill-badge">Presupuestos de proyecto</span>
+              </div>
+            </div>
+
+            <div class="skills-group">
+              <div class="skills-group-title">Programación</div>
+              <div class="skills-badges">
+                <span class="skill-badge">Python</span>
+                <span class="skill-badge">Flask & FastAPI</span>
+                <span class="skill-badge">Algoritmos (Greedy, BFS)</span>
+                <span class="skill-badge">Análisis de complejidad</span>
+                <span class="skill-badge">APIs</span>
+                <span class="skill-badge">JSON</span>
+              </div>
+            </div>
+
+            <div class="skills-group">
+              <div class="skills-group-title">Frontend, UI & visualización</div>
+              <div class="skills-badges">
+                <span class="skill-badge">HTML5</span>
+                <span class="skill-badge">CSS3</span>
+                <span class="skill-badge">Bootstrap 5</span>
+                <span class="skill-badge">JavaScript</span>
+                <span class="skill-badge">Matplotlib</span>
+                <span class="skill-badge">Prototipado de interfaces</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Formación -->
+          <div class="glass-card reveal" id="formacion">
+            <div class="card-title-row">
+              <div class="card-icon">
+                <svg viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c3 3 9 3 12 0v-5"></path></svg>
+              </div>
+              <div>
+                <h3>Formación académica</h3>
+                <p>Universidad</p>
+              </div>
+            </div>
+
+            <div class="timeline">
+              <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-period">En curso</div>
+                <h4 class="timeline-degree">Licenciatura en Gestión de Tecnología de la Información</h4>
+                <div class="timeline-institution">UADE — Universidad Argentina de la Empresa</div>
+                <p class="timeline-details">
+                  Carrera que combina la gestión de organizaciones con sistemas de información, datos, algoritmos, ingeniería de software y dirección de proyectos tecnológicos.
+                </p>
+              </div>
+
+              <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-period">Materias aplicadas en este portfolio</div>
+                <h4 class="timeline-degree">Ejes de la carrera</h4>
+                <ul class="timeline-details">
+                  <li><strong>Sistemas de Información II:</strong> relevamiento, requerimientos, DFD y casos de uso.</li>
+                  <li><strong>Diseño y Análisis de Algoritmos:</strong> estrategias greedy, complejidad y búsqueda.</li>
+                  <li><strong>Diseño y Desarrollo Web:</strong> maquetación responsive y experiencia de usuario.</li>
+                  <li><strong>Programación 2:</strong> Python, persistencia de datos y aplicaciones web.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         CONTACTO
+         ========================================================================== -->
+    <section class="contact-section" id="contacto">
+      <div class="container contact-box">
+        <span class="section-tag">Hablemos</span>
+        <h2 class="contact-title">¿Te interesa mi perfil?</h2>
+        <p class="contact-desc">
+          Estoy abierto a pasantías, primeras experiencias y proyectos vinculados a la gestión de tecnología y el desarrollo de software.
+        </p>
+
+        <div class="contact-links">
+          <a href="mailto:martineznicolas.it@gmail.com" class="contact-card">
+            <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+            <div><b>Email</b><span>martineznicolas.it@gmail.com</span></div>
+          </a>
+          <a href="https://wa.me/5491158628488" target="_blank" rel="noopener noreferrer" class="contact-card">
+            <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+            <div><b>WhatsApp</b><span>+54 9 11 5862-8488</span></div>
+          </a>
+          <a href="https://www.linkedin.com/in/nicolas-martinez-aa60b3402" target="_blank" rel="noopener noreferrer" class="contact-card">
+            <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+            <div><b>LinkedIn</b><span>nicolas-martinez</span></div>
+          </a>
+          <a href="https://github.com/martineznicolas-it" target="_blank" rel="noopener noreferrer" class="contact-card">
+            <svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+            <div><b>GitHub</b><span>martineznicolas-it</span></div>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p><strong>Nicolás Martínez</strong> — Portfolio académico & profesional</p>
+      <p style="font-size: 0.82rem;">Licenciatura en Gestión de Tecnología de la Información • Universidad Argentina de la Empresa (UADE)</p>
+      <p style="font-size: 0.78rem; margin-top: 0.5rem; opacity: 0.7;">© 2026 • Hecho con HTML, CSS y JavaScript</p>
+    </div>
+  </footer>
+
+  <!-- ==========================================================================
+       LIGHTBOX
+       ========================================================================== -->
+  <div class="lightbox-modal" id="lightboxModal" role="dialog" aria-modal="true" aria-label="Vista ampliada">
+    <button class="lightbox-btn lightbox-close" id="lbClose" aria-label="Cerrar vista ampliada">
+      <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+    </button>
+    <button class="lightbox-btn lightbox-prev" id="lbPrev" aria-label="Imagen anterior">
+      <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"></path></svg>
+    </button>
+    <div class="lightbox-content">
+      <img id="lightboxImg" src="" alt="Vista ampliada" class="lightbox-img" />
+      <div id="lightboxCaption" class="lightbox-caption"></div>
+    </div>
+    <button class="lightbox-btn lightbox-next" id="lbNext" aria-label="Imagen siguiente">
+      <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"></path></svg>
+    </button>
+  </div>
+
+  <script>
+    // -------------------------------------------------------------
+    // 1. TEMAS: oscuro → terminal → claro (se recuerda entre visitas)
+    // -------------------------------------------------------------
+    const htmlElement = document.documentElement;
+    const themeBtn = document.getElementById('themeToggle');
+    const THEMES = ['dark', 'green', 'light'];
+    const THEME_NAMES = { dark: 'oscuro', green: 'terminal', light: 'claro' };
+    function labelTheme() {
+      const cur = htmlElement.getAttribute('data-theme');
+      const next = THEMES[(THEMES.indexOf(cur) + 1) % THEMES.length];
+      const text = 'Tema ' + THEME_NAMES[cur] + '. Cambiar a ' + THEME_NAMES[next];
+      themeBtn.setAttribute('aria-label', text);
+      themeBtn.title = text;
+    }
+    themeBtn.addEventListener('click', () => {
+      const cur = htmlElement.getAttribute('data-theme');
+      const newTheme = THEMES[(THEMES.indexOf(cur) + 1) % THEMES.length];
+      htmlElement.setAttribute('data-theme', newTheme);
+      try { localStorage.setItem('portfolio-theme', newTheme); } catch (e) {}
+      labelTheme();
+    });
+    labelTheme();
+
+    // -------------------------------------------------------------
+    // 2. MENÚ MÓVIL
+    // -------------------------------------------------------------
+    const hamburgerBtn = document.getElementById('hamburgerBtn');
+    const navMenu = document.getElementById('navMenu');
+    hamburgerBtn.addEventListener('click', () => {
+      const open = navMenu.classList.toggle('open');
+      hamburgerBtn.setAttribute('aria-expanded', open);
+    });
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        navMenu.classList.remove('open');
+        hamburgerBtn.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    // -------------------------------------------------------------
+    // 3. GALERÍAS
+    // Cada bloque [data-gallery] arranca con sus miniaturas; acá se arma
+    // el escenario grande, las flechas, el contador y la leyenda.
+    // Para sumar una captura alcanza con agregar otro <button class="thumb">.
+    // -------------------------------------------------------------
+    const ICON_PREV = '<svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"></path></svg>';
+    const ICON_NEXT = '<svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"></path></svg>';
+    const galleries = [];
+
+    document.querySelectorAll('[data-gallery]').forEach(box => {
+      const thumbs = [...box.querySelectorAll('.thumb')];
+      const items = thumbs.map(t => ({ src: t.dataset.src, caption: t.dataset.caption || '' }));
+      const multi = items.length > 1;
+
+      const stage = document.createElement('div');
+      stage.className = 'stage';
+      stage.innerHTML =
+        '<img class="stage-bg" alt="" aria-hidden="true">' +
+        '<img class="stage-img">' +
+        (multi ? '<button class="stage-nav prev" aria-label="Imagen anterior">' + ICON_PREV + '</button>' +
+                 '<button class="stage-nav next" aria-label="Imagen siguiente">' + ICON_NEXT + '</button>' +
+                 '<span class="stage-count"></span>' : '') +
+        '<div class="zoom-hint"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>Ampliar</div>';
+
+      const bar = document.createElement('div');
+      bar.className = 'gallery-bar';
+      const caption = document.createElement('p');
+      caption.className = 'stage-caption';
+      bar.appendChild(caption);
+      if (multi) {
+        const strip = document.createElement('div');
+        strip.className = 'gallery-thumbs';
+        thumbs.forEach(t => strip.appendChild(t));
+        bar.appendChild(strip);
+      } else {
+        thumbs.forEach(t => t.remove());
+      }
+      box.append(stage, bar);
+
+      const g = { items, index: 0, thumbs, stage, caption,
+        bg: stage.querySelector('.stage-bg'), img: stage.querySelector('.stage-img'),
+        count: stage.querySelector('.stage-count') };
+      galleries.push(g);
+
+      g.show = (i) => {
+        g.index = (i + items.length) % items.length;
+        const it = items[g.index];
+        g.img.style.opacity = '0.35';
+        const pre = new Image();
+        pre.onload = pre.onerror = () => {
+          g.img.src = it.src; g.bg.src = it.src;
+          g.img.alt = it.caption;
+          g.img.style.opacity = '1';
+        };
+        pre.src = it.src;
+        caption.textContent = it.caption;
+        if (g.count) g.count.textContent = (g.index + 1) + ' / ' + items.length;
+        thumbs.forEach((t, k) => t.classList.toggle('active', k === g.index));
+      };
+
+      thumbs.forEach((t, k) => t.addEventListener('click', () => g.show(k)));
+      stage.addEventListener('click', e => {
+        const nav = e.target.closest('.stage-nav');
+        if (nav) { g.show(g.index + (nav.classList.contains('next') ? 1 : -1)); return; }
+        openLightbox(g);
+      });
+
+      g.show(0);
+    });
+
+    // -------------------------------------------------------------
+    // 4. LIGHTBOX (con flechas y teclado)
+    // -------------------------------------------------------------
+    const lightboxModal = document.getElementById('lightboxModal');
+    const lightboxImg = document.getElementById('lightboxImg');
+    const lightboxCaption = document.getElementById('lightboxCaption');
+    const lbPrev = document.getElementById('lbPrev');
+    const lbNext = document.getElementById('lbNext');
+    let current = null;
+
+    function renderLightbox() {
+      const it = current.items[current.index];
+      lightboxImg.src = it.src;
+      lightboxImg.alt = it.caption;
+      lightboxCaption.textContent = it.caption;
+      const multi = current.items.length > 1;
+      lbPrev.style.display = lbNext.style.display = multi ? 'flex' : 'none';
+    }
+    function openLightbox(g) {
+      current = g;
+      renderLightbox();
+      lightboxModal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+      document.getElementById('lbClose').focus();
+    }
+    function closeLightbox() {
+      lightboxModal.classList.remove('active');
+      document.body.style.overflow = '';
+      current = null;
+    }
+    function stepLightbox(d) {
+      if (!current) return;
+      current.show(current.index + d);
+      renderLightbox();
+    }
+
+    document.getElementById('lbClose').addEventListener('click', closeLightbox);
+    lbPrev.addEventListener('click', e => { e.stopPropagation(); stepLightbox(-1); });
+    lbNext.addEventListener('click', e => { e.stopPropagation(); stepLightbox(1); });
+    lightboxModal.addEventListener('click', e => { if (e.target === lightboxModal) closeLightbox(); });
+    document.addEventListener('keydown', e => {
+      if (!lightboxModal.classList.contains('active')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft') stepLightbox(-1);
+      if (e.key === 'ArrowRight') stepLightbox(1);
+    });
+
+    // -------------------------------------------------------------
+    // 5. FILTRO DE PROYECTOS
+    // -------------------------------------------------------------
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const projectCards = document.querySelectorAll('.project-card');
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const filter = btn.dataset.filter;
+
+        projectCards.forEach(card => {
+          if (filter === 'all' || card.dataset.category === filter) {
+            card.style.display = '';
+            requestAnimationFrame(() => { card.style.opacity = '1'; card.style.transform = ''; });
+          } else {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(15px)';
+            setTimeout(() => { card.style.display = 'none'; }, 200);
+          }
+        });
+      });
+    });
+
+    // -------------------------------------------------------------
+    // 6. APARICIÓN AL HACER SCROLL
+    // -------------------------------------------------------------
+    const reveals = document.querySelectorAll('.reveal');
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver(entries => {
+        entries.forEach(en => { if (en.isIntersecting) { en.target.classList.add('visible'); io.unobserve(en.target); } });
+      }, { threshold: 0.08 });
+      reveals.forEach(el => io.observe(el));
+    } else {
+      reveals.forEach(el => el.classList.add('visible'));
+    }
+
+    // -------------------------------------------------------------
+    // 7. MENÚ ACTIVO SEGÚN LA SECCIÓN VISIBLE
+    // -------------------------------------------------------------
+    const navLinks = document.querySelectorAll('.nav-link');
+    const sections = [...document.querySelectorAll('main section[id], #formacion')];
+    window.addEventListener('scroll', () => {
+      let currentId = 'inicio';
+      sections.forEach(sec => {
+        if (sec.getBoundingClientRect().top <= 140) currentId = sec.id;
+      });
+      navLinks.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + currentId));
+    }, { passive: true });
+  </script>
+</body>
+</html>
