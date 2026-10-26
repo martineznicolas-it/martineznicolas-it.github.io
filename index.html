@@ -673,7 +673,7 @@
         </h1>
 
         <p class="hero-subtitle">
-          Proyectos académicos y personales de análisis de sistemas, algoritmos y desarrollo web. Me enfoco en entender el problema del negocio, documentarlo bien y llegar a una solución concreta, apoyándome en herramientas de inteligencia artificial para trabajar más rápido y con mejor calidad.
+          Proyectos académicos y personales de análisis de sistemas, algoritmos, desarrollo web e inteligencia artificial aplicada. Me enfoco en entender el problema del negocio, documentarlo bien y llegar a una solución concreta, apoyándome en herramientas de inteligencia artificial para trabajar más rápido y con mejor calidad.
         </p>
 
         <div class="hero-tags">
@@ -682,6 +682,7 @@
           <span class="hero-tag">Desarrollo Web (Flask / FastAPI)</span>
           <span class="hero-tag">Diseño UI & Prototipado</span>
           <span class="hero-tag ai">IA aplicada al trabajo</span>
+          <span class="hero-tag ai">RAG con Gemini API</span>
         </div>
 
         <div class="hero-actions">
@@ -694,7 +695,7 @@
 
         <div class="hero-stats">
           <div class="stat-card">
-            <div class="stat-number">5</div>
+            <div class="stat-number">6</div>
             <div class="stat-label">Proyectos documentados</div>
           </div>
           <div class="stat-card">
@@ -728,13 +729,98 @@
         </div>
 
         <div class="project-filters" role="group" aria-label="Filtrar proyectos">
-          <button class="filter-btn active" data-filter="all">Todos (5)</button>
+          <button class="filter-btn active" data-filter="all">Todos (6)</button>
+          <button class="filter-btn" data-filter="ia">IA aplicada</button>
           <button class="filter-btn" data-filter="gestion">Gestión & Análisis</button>
           <button class="filter-btn" data-filter="algoritmos">Algoritmos</button>
           <button class="filter-btn" data-filter="web">Desarrollo Web & Software</button>
         </div>
 
         <div class="projects-container">
+
+          <!-- ====================================================================
+               PROYECTO: ASISTENTE HSM 360 (RAG)
+               ==================================================================== -->
+          <article class="project-card reveal" data-category="ia">
+            <div class="project-visuals" data-gallery>
+              <button class="thumb active" data-src="img/asistente-respuesta.jpg" data-caption="Respuesta con citas: cada número abre el texto original del documento del que sale el dato"><img src="img/asistente-respuesta.jpg" alt="Respuesta del asistente con fuentes" loading="lazy" /></button>
+              <button class="thumb" data-src="img/asistente-no-sabe.jpg" data-caption="Si la información no está en los documentos, lo dice en vez de inventar"><img src="img/asistente-no-sabe.jpg" alt="El asistente indica que no encuentra la información" loading="lazy" /></button>
+              <button class="thumb" data-src="img/asistente-evaluacion.jpg" data-caption="Evaluación propia: 14 de 15 respuestas correctas sobre preguntas verificadas a mano"><img src="img/asistente-evaluacion.jpg" alt="Resultados de la evaluación" loading="lazy" /></button>
+              <button class="thumb" data-src="img/asistente-inicio.jpg" data-caption="Pantalla de inicio con preguntas de ejemplo y la tecnología utilizada"><img src="img/asistente-inicio.jpg" alt="Pantalla de inicio del asistente" loading="lazy" /></button>
+            </div>
+
+            <div class="project-info">
+              <div class="project-head">
+                <div>
+                  <div class="project-badges">
+                    <span class="badge-personal">Proyecto personal</span>
+                    <span class="badge-period">IA aplicada • 2026</span>
+                  </div>
+                  <h3 class="project-title">Asistente HSM 360 – Preguntale a tu proyecto</h3>
+                  <div class="project-subtitle">Asistente con IA que responde sobre la documentación de un proyecto y cita cada fuente</div>
+                </div>
+                <div class="project-num" aria-hidden="true">01</div>
+              </div>
+
+              <div class="project-body">
+                <div>
+                  <div class="project-desc-block">
+                    <div class="desc-label">El problema</div>
+                    <p class="desc-text">
+                      Un proyecto de análisis genera muchos documentos: requerimientos, casos de uso, presupuestos, entrevistas. Encontrar un dato puntual obliga a recorrerlos uno por uno. Este asistente permite preguntar en lenguaje natural sobre los 11 documentos del caso HSM 360 y obtener la respuesta con la página exacta de donde sale.
+                    </p>
+                  </div>
+                  <div class="project-desc-block">
+                    <div class="desc-label">Decisiones de diseño</div>
+                    <ul class="desc-list">
+                      <li><b>Responde solo con los documentos</b> y, si el dato no está, lo dice en vez de inventar.</li>
+                      <li><b>Privacidad:</b> los nombres de personas se anonimizan antes de enviar cualquier texto a la API.</li>
+                      <li><b>Costo:</b> elegí modelos livianos; cada consulta cuesta menos de un décimo de centavo de dólar.</li>
+                      <li><b>Disponibilidad:</b> si el modelo principal está saturado, pasa automáticamente a uno de respaldo.</li>
+                      <li><b>Medición:</b> armé una evaluación con 15 preguntas de respuesta conocida para saber cuánto acierta.</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="project-side">
+                  <div class="project-highlights">
+                    <div class="highlight-item">
+                      <div class="highlight-val accent-green">14 / 15</div>
+                      <div class="highlight-desc">Respuestas correctas en la evaluación</div>
+                    </div>
+                    <div class="highlight-item">
+                      <div class="highlight-val">&lt; USD 0,001</div>
+                      <div class="highlight-desc">Costo estimado por consulta</div>
+                    </div>
+                    <div class="highlight-item full-width">
+                      <div class="highlight-val small">3 / 3 preguntas sin respuesta detectadas</div>
+                      <div class="highlight-desc">Ante preguntas cuyo dato no está en los documentos (empleados, facturación, tecnología usada), respondió "no lo encuentro" en todos los casos. El único error fue elegir un dato de crecimiento distinto al pedido, lo que muestra dónde mejorar la búsqueda.</div>
+                    </div>
+                  </div>
+                  <div class="tech-stack">
+                    <span class="tech-pill">Python</span>
+                    <span class="tech-pill">Gemini API</span>
+                    <span class="tech-pill">RAG</span>
+                    <span class="tech-pill">Embeddings</span>
+                    <span class="tech-pill">Flask</span>
+                    <span class="tech-pill">NumPy</span>
+                    <span class="tech-pill">PyMuPDF</span>
+                    <span class="tech-pill">Evaluación de IA</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="flow">
+                <div class="desc-label" style="margin-bottom:0.85rem;">Cómo funciona por dentro</div>
+                <div class="flow-steps">
+                  <div class="flow-step"><b>Documentos</b><span>11 PDF procesados en 139 fragmentos, cada uno con su página</span></div>
+                  <div class="flow-step"><b>Huellas de significado</b><span>Cada fragmento se convierte en un vector con un modelo de embeddings</span></div>
+                  <div class="flow-step key"><b>Búsqueda</b><span>Se eligen los fragmentos más parecidos a la pregunta, por significado</span></div>
+                  <div class="flow-step"><b>Respuesta con citas</b><span>El modelo redacta usando solo esos fragmentos y cita cada uno</span></div>
+                </div>
+              </div>
+            </div>
+          </article>
 
           <!-- ====================================================================
                PROYECTO 1: HSM 360
@@ -758,7 +844,7 @@
                   <h3 class="project-title">HSM 360 – Transformación digital & logística</h3>
                   <div class="project-subtitle">Nueva unidad de negocio de corralón para una distribuidora de hierros</div>
                 </div>
-                <div class="project-num" aria-hidden="true">01</div>
+                <div class="project-num" aria-hidden="true">02</div>
               </div>
 
               <div class="project-body">
@@ -836,7 +922,7 @@
                   <h3 class="project-title">Robot Unitree – Navegación con algoritmo Greedy</h3>
                   <div class="project-subtitle">Búsqueda de caminos en una grilla con obstáculos y zonas prohibidas</div>
                 </div>
-                <div class="project-num" aria-hidden="true">02</div>
+                <div class="project-num" aria-hidden="true">03</div>
               </div>
 
               <div class="project-body">
@@ -906,7 +992,7 @@
                   <h3 class="project-title">CheBurga – Sitio web gastronómico</h3>
                   <div class="project-subtitle">Sitio comercial multipágina con identidad de marca propia</div>
                 </div>
-                <div class="project-num" aria-hidden="true">03</div>
+                <div class="project-num" aria-hidden="true">04</div>
               </div>
 
               <div class="project-body">
@@ -973,7 +1059,7 @@
                   <h3 class="project-title">Tracker de hábitos & analítica</h3>
                   <div class="project-subtitle">De programa de consola a aplicación web con gráficos</div>
                 </div>
-                <div class="project-num" aria-hidden="true">04</div>
+                <div class="project-num" aria-hidden="true">05</div>
               </div>
 
               <div class="project-body">
@@ -1041,7 +1127,7 @@
                   <h3 class="project-title">Atelier Meridian – Arquitectura & interiorismo</h3>
                   <div class="project-subtitle">Sitio editorial para un estudio de diseño ficticio</div>
                 </div>
-                <div class="project-num" aria-hidden="true">05</div>
+                <div class="project-num" aria-hidden="true">06</div>
               </div>
 
               <div class="project-body">
@@ -1128,6 +1214,10 @@
               <span class="skill-badge">Asistentes de código</span>
               <span class="skill-badge">Automatización de tareas</span>
               <span class="skill-badge">Validación de resultados</span>
+              <span class="skill-badge">RAG</span>
+              <span class="skill-badge">Embeddings</span>
+              <span class="skill-badge">Gemini API</span>
+              <span class="skill-badge">Evaluación de respuestas de IA</span>
             </div>
           </div>
 
