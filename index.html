@@ -193,6 +193,8 @@
     /* Tres columnas: los costados miden lo mismo, así el menú queda centrado en la página
        aunque el logo sea más ancho que el botón del tema */
     .nav-container { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 1.5rem; height: 72px; }
+    /* La barra ocupa todo el ancho: logo y botón de tema van a los bordes de la pantalla */
+    .container.nav-container { max-width: none; padding: 0 2rem; }
     .nav-container > .logo { justify-self: start; }
     .nav-container > .nav-actions { justify-self: end; }
 
