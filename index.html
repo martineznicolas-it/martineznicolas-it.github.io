@@ -752,7 +752,7 @@
             <div class="project-visuals" data-gallery>
               <button class="thumb active" data-src="img/asistente-respuesta.jpg" data-caption="Respuesta con citas: cada número abre el texto original del documento del que sale el dato"><img src="img/asistente-respuesta.jpg" alt="Respuesta del asistente con fuentes" loading="lazy" /></button>
               <button class="thumb" data-src="img/asistente-no-sabe.jpg" data-caption="Si la información no está en los documentos, lo dice en vez de inventar"><img src="img/asistente-no-sabe.jpg" alt="El asistente indica que no encuentra la información" loading="lazy" /></button>
-              <button class="thumb" data-src="img/asistente-evaluacion.jpg" data-caption="Evaluación propia: 14 de 15 respuestas correctas sobre preguntas verificadas a mano"><img src="img/asistente-evaluacion.jpg" alt="Resultados de la evaluación" loading="lazy" /></button>
+              <button class="thumb" data-src="img/asistente-evaluacion.jpg" data-caption="Evaluación propia: 44 de 44 respuestas correctas, con datos verificados a mano, preguntas sin respuesta y pedidos que no debe cumplir"><img src="img/asistente-evaluacion.jpg" alt="Resultados de la evaluación" loading="lazy" /></button>
               <button class="thumb" data-src="img/asistente-inicio.jpg" data-caption="Pantalla de inicio con preguntas de ejemplo y la tecnología utilizada"><img src="img/asistente-inicio.jpg" alt="Pantalla de inicio del asistente" loading="lazy" /></button>
             </div>
 
@@ -763,8 +763,8 @@
                     <span class="badge-personal">Proyecto personal</span>
                     <span class="badge-period">IA aplicada • 2026</span>
                   </div>
-                  <h3 class="project-title">Asistente HSM 360 – Preguntale a tu proyecto</h3>
-                  <div class="project-subtitle">Asistente con IA que responde sobre la documentación de un proyecto y cita cada fuente</div>
+                  <h3 class="project-title">Asistente del portfolio – Preguntale a mis proyectos</h3>
+                  <div class="project-subtitle">Asistente con IA que responde sobre mis proyectos y mi perfil, y cita cada fuente</div>
                   <div class="project-cta">
                     <a href="https://asistente-hsm.onrender.com" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
                       Probar el asistente en vivo
@@ -781,17 +781,18 @@
                   <div class="project-desc-block">
                     <div class="desc-label">El problema</div>
                     <p class="desc-text">
-                      Un proyecto de análisis genera muchos documentos: requerimientos, casos de uso, presupuestos, entrevistas. Encontrar un dato puntual obliga a recorrerlos uno por uno. Este asistente permite preguntar en lenguaje natural sobre los 11 documentos del caso HSM 360 y obtener la respuesta con la página exacta de donde sale.
+                      Los proyectos generan muchos documentos: requerimientos, casos de uso, presupuestos, informes. Encontrar un dato puntual obliga a recorrerlos uno por uno. Este asistente permite preguntar en lenguaje natural sobre todos los proyectos de este portfolio y sobre mi perfil, y obtener la respuesta con el documento y la página o sección de donde sale. Empezó respondiendo solo sobre HSM 360 y después lo amplié al resto.
                     </p>
                   </div>
                   <div class="project-desc-block">
                     <div class="desc-label">Decisiones de diseño</div>
                     <ul class="desc-list">
                       <li><b>Responde solo con los documentos</b> y, si el dato no está, lo dice en vez de inventar.</li>
-                      <li><b>Privacidad:</b> los nombres de personas se anonimizan antes de enviar cualquier texto a la API.</li>
+                      <li><b>Privacidad:</b> los nombres de personas se anonimizan antes de enviar cualquier texto a la API, y el código de los proyectos no se carga: solo informes y fichas descriptivas.</li>
+                      <li><b>Búsqueda híbrida:</b> combina la búsqueda por significado con la búsqueda por palabras clave, para no confundir datos parecidos.</li>
                       <li><b>Costo:</b> elegí modelos livianos; cada consulta cuesta menos de un décimo de centavo de dólar.</li>
                       <li><b>Disponibilidad:</b> si el modelo principal está saturado, pasa automáticamente a uno de respaldo.</li>
-                      <li><b>Medición:</b> armé una evaluación con 15 preguntas de respuesta conocida para saber cuánto acierta.</li>
+                      <li><b>Medición:</b> armé una evaluación con 44 preguntas: datos verificados a mano en los documentos, preguntas cuya respuesta no está y pedidos que no debe cumplir. Las 15 preguntas de la primera versión se mantienen como prueba de regresión.</li>
                     </ul>
                   </div>
                 </div>
@@ -799,7 +800,7 @@
                 <div class="project-side">
                   <div class="project-highlights">
                     <div class="highlight-item">
-                      <div class="highlight-val accent-green">14 / 15</div>
+                      <div class="highlight-val accent-green">44 / 44</div>
                       <div class="highlight-desc">Respuestas correctas en la evaluación</div>
                     </div>
                     <div class="highlight-item">
@@ -807,8 +808,8 @@
                       <div class="highlight-desc">Costo estimado por consulta</div>
                     </div>
                     <div class="highlight-item full-width">
-                      <div class="highlight-val small">3 / 3 preguntas sin respuesta detectadas</div>
-                      <div class="highlight-desc">Ante preguntas cuyo dato no está en los documentos (empleados, facturación, tecnología usada), respondió "no lo encuentro" en todos los casos. El único error fue elegir un dato de crecimiento distinto al pedido, lo que muestra dónde mejorar la búsqueda.</div>
+                      <div class="highlight-val small">7 / 7 preguntas sin respuesta detectadas</div>
+                      <div class="highlight-desc">Ante preguntas cuyo dato no está en los documentos, respondió "no lo encuentro" en todos los casos en vez de inventar. La primera versión fallaba en 1 de 15 preguntas porque confundía dos datos de crecimiento; con la búsqueda híbrida, esa pregunta ahora se responde bien.</div>
                     </div>
                   </div>
                   <div class="tech-stack">
@@ -816,6 +817,7 @@
                     <span class="tech-pill">Gemini API</span>
                     <span class="tech-pill">RAG</span>
                     <span class="tech-pill">Embeddings</span>
+                    <span class="tech-pill">BM25</span>
                     <span class="tech-pill">Flask</span>
                     <span class="tech-pill">NumPy</span>
                     <span class="tech-pill">PyMuPDF</span>
@@ -827,9 +829,9 @@
               <div class="flow">
                 <div class="desc-label" style="margin-bottom:0.85rem;">Cómo funciona por dentro</div>
                 <div class="flow-steps">
-                  <div class="flow-step"><b>Documentos</b><span>11 PDF procesados en 139 fragmentos, cada uno con su página</span></div>
+                  <div class="flow-step"><b>Documentos</b><span>13 PDF y 7 fichas procesados en 189 fragmentos, cada uno con su proyecto y su página o sección</span></div>
                   <div class="flow-step"><b>Huellas de significado</b><span>Cada fragmento se convierte en un vector con un modelo de embeddings</span></div>
-                  <div class="flow-step key"><b>Búsqueda</b><span>Se eligen los fragmentos más parecidos a la pregunta, por significado</span></div>
+                  <div class="flow-step key"><b>Búsqueda híbrida</b><span>Se eligen los fragmentos más relevantes, por significado y por palabras clave</span></div>
                   <div class="flow-step"><b>Respuesta con citas</b><span>El modelo redacta usando solo esos fragmentos y cita cada uno</span></div>
                 </div>
               </div>
